@@ -14,6 +14,7 @@
 
 <script>
 import TypeaheadVue from '@/components/Typeahead.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
@@ -23,9 +24,7 @@ export default {
     }
   },
   computed: {
-    countries () {
-      return this.$store.state.countries
-    }
+    ...mapState(['countries'])
   },
   created () {
     this.$store.dispatch('loadCountries')
