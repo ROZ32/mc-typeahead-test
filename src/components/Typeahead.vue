@@ -15,12 +15,18 @@ import Choices from '../../node_modules/choices.js/public/assets/scripts/choices
 export default {
   name: 'Typeahead',
   props: {
-    options: Object
+    options: Object | Array
   },
   mounted: function () {
     this.choicesInstance = new Choices(this.$refs.choises)
     this.$refs.choises.addEventListener('addItem', this.handleSelectChange)
-    this.setChoices()
+  },
+  watch: {
+    options: function (newVal, oldVal) {
+      if (newVal.data) {
+        this.setChoices(newVal.data)
+      }
+    }
   },
   methods: {
     handleSelectChange (e) {
